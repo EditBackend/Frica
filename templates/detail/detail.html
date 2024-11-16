@@ -1,0 +1,104 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .product-detail {
+            background-color: #fff;
+            border-radius: 8px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        .product-header {
+            text-align: center;
+            padding: 20px;
+            background-color: #4a90e2;
+            color: #fff;
+        }
+        .product-header h1 {
+            margin: 0;
+        }
+        .product-image {
+            text-align: center;
+            background-color: #fafafa;
+            padding: 20px;
+        }
+        .product-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        .product-info {
+            padding: 20px;
+        }
+        .product-info p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .product-info p strong {
+            color: #4a90e2;
+        }
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .current-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+        .old-price {
+            font-size: 20px;
+            color: #e74c3c;
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+
+{% block content %}
+    <div class="product-detail">
+        <div class="product-header">
+            <h1>{{ product.name }}</h1>
+        </div>
+
+        <div class="product-image">
+            <img src="{{ product.img.url }}" alt="{{ product.name }}">
+        </div>
+
+        <div class="product-info">
+            <p><strong>Kompaniya:</strong> {{ product.company }}</p>
+            <p><strong>Kategoriya:</strong> {{ product.category }}</p>
+
+            <div class="product-price">
+                <span class="current-price">${{ product.price }}</span>
+                {% if product.salePrice %}
+                    <span class="old-price">${{ product.salePrice }}</span>
+                {% endif %}
+            </div>
+
+            <p><strong>Tavsif:</strong> {{ product.description }}</p>
+        </div>
+    </div>
+{% endblock content %}
+
+</body>
+</html>
